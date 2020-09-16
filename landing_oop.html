@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <ul id="the_ul" class="nav navbar-nav navbar-hoverable">
+
+</ul>
+</nav>
+<h1 id="section1" class="section" data-link-type="link1">This is a Heading1</h1>
+<h1 id="section2" class="section" data-link-type="link2">This is a Heading2</h1>
+<h1 id="section3" class="section" data-link-type="link3">This is a Heading3</h1>
+<h1 id="section4" class="section" data-link-type="link4">This is a Heading4</h1>
+<h1 id="section5" class="section" data-link-type="link5">This is a Heading5</h1>
+<h1 id="section6" class="section" data-link-type="link6">This is a Heading6</h1>
+<script>
+const sections = document.querySelectorAll(".section");
+const myul = document.querySelector("#the_ul");
+
+
+const app = { 
+     name: "landing_page_project",
+     author: "Mahmoud_hegazy",
+     mail: "mahmod.hagzy@gmail.com",
+     links: [],
+     sections: [],
+     active_section: null,
+     active_link: null,
+     // count function start
+     count_sections: (get_sections) => {
+       // get sections count
+       sections.forEach( (section)=> {
+       
+
+         // advanced step to secure and get ultimate runing with troubelshoot
+
+         app.sections.push(section);
+         let sections_list =  app.sections;
+         let sections_count = sections_list.length;
+         let sections_meta  = [sections_list, sections_count];
+         return sections_list;
+
+
+     });
+     // end foreach loop
+         
+       },
+     // count_end
+     // create_link
+     create_links: (x) => {
+     
+           get_sections = app.count_sections(sections);
+           const fragment = document.createDocumentFragment();
+           x.forEach( (section) => {
+           //create Links
+           
+           //alert(section);
+           let   link_text = section.getAttribute("data-link-type");
+           const newli = document.createElement( 'li' );
+           const newlink = document.createElement( 'a' );
+           const text = document.createTextNode(link_text);           
+           const create_text = document.createTextNode(link_text);
+           // get section data-type attrbuite value
+           
+           newli.appendChild(newlink);
+           newlink.appendChild(create_text);
+           newli.classList.add("li_style");
+           newlink.classList.add("links_style");
+           newlink.id = link_text;
+           //append the links to the app_object links array
+           app.links.push(newlink);     
+           
+           // each time throgh the loop append new li elemnt to fragemnt
+           fragment.appendChild(newli);
+            
+        });
+         
+         //for better performance we append document fragment to links 1 time only          
+         myul.appendChild(fragment);
+         console.log(this.links);
+         return app.links;  
+
+}
+
+
+}
+
+         
+
+
+console.log(app.create_links(sections));
+
+
+</script>
+</body>
+</html>
