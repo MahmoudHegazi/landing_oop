@@ -531,8 +531,16 @@ const app = {
   },  
   // end nav build
   // start of scrol and detect elem
-  get_active: ()=> {
-        function myFunction() {
+
+  applay_active: ()=> {
+    window.addEventListener('scroll', (event) => {
+   
+    app.get_active();
+    console.log('Element Detected');
+});
+  },
+    get_active: function myFunction() {
+        
   
   // remove  active class section
     function cleaner() {
@@ -585,14 +593,11 @@ const app = {
   };
 
   });
-  }
   },
-  applay_active: ()=> {
-    window.addEventListener('scroll', (event) => {
-   
-    app.myFunction();
-    console.log('Element Detected');
-});
+  start: ()=> {
+    app.nav_builder();
+    app.applay_active();
+    
   }
 
 
@@ -600,9 +605,10 @@ const app = {
 
          
 
+app.start();
 
 
-app.nav_builder();
+
 
 
 
