@@ -14,6 +14,10 @@
   .active {
      background-color: gold !important;
   }
+  
+  .active_link {
+     background-color: gold !important;
+  }
   .section {
     background-color: crimson;
     
@@ -499,6 +503,7 @@ const app = {
            
            newli.appendChild(newlink);
            newlink.appendChild(create_text);
+           newlink.classList.add("mynav_link");
            newlink.id = link_text;
            //append the links to the app_object links array
            app.links.push(newlink);     
@@ -538,12 +543,36 @@ window.addEventListener('scroll', (event) => {
   //var div = document.querySelectorAll(".");
   let index = 0;
   function myFunction() {
+  
+  // remove  active class section
     function cleaner() {
     sections.forEach((section) => { 
        section.classList.remove("active");
     });
     console.log("active_class_removed")
   }
+  
+  
+  // check active link function
+   function  which_link_active( section ) {
+        let alllinks = document.querySelectorAll( ".mynav_link" );
+        let section_data =  section.getAttribute("data-link-type");
+        
+        // remove any prvious active link
+        alllinks.forEach( (link, index, array) => {
+            array[index].classList.remove("active_link");            
+          });
+          
+        // add active status to the link  
+        alllinks.forEach( (link, index, array) => {
+        if (link.textContent == section_data) {
+            array[index].classList.add("active_link");
+            
+          } 
+        
+        });
+  }
+
   sections.forEach( (elm) => { 
   const rect = elm.getBoundingClientRect();
   const x = rect.left;
@@ -555,14 +584,14 @@ window.addEventListener('scroll', (event) => {
   let backgrounds = ["crimson", "gold", "black", "lightgra", "lightblue", "tomato"];
   
 
-
-  if (b <= (window.innerHeight + h) && y >= 0) {
+  let get_space = h * 5 / 100; 
+  if (b <= (window.innerHeight + get_space) && y >= 0) {
     //elm.style.background = "blue";
     cleaner();
     elm.classList.add("active");
-    
+    which_link_active(elm);
     //alert(rect.bottom);
-    return elm;
+    //return elm;
   };
 
   });
