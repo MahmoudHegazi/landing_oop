@@ -2,4 +2,4 @@
 
 OOP version 
 
-<img src="land.PNG">
+<img src="land.png">
