@@ -11,6 +11,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <style>
+  html {
+  scroll-behavior: smooth;
+}
   .active {
      background-color: gold !important;
   }
@@ -200,10 +203,36 @@
       font-size: 150px;
     }
   }
+  
+  /* back to top */
+  .the_button {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 30px;
+  z-index: 99;
+  font-size: 18px;
+  border: none;
+  outline: none;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 4px;
+}
+
+.the_button:hover {
+  background-color: #555;
+}
   </style>
 </head>
 <body id="myPage" data-spy="scroll" style="background-color:gold;" data-target=".navbar" data-offset="60">
 
+
+<!-- back_to_top_button -->
+
+
+<button class="the_button" id="topbtn" onclick="app.back_top()">ToP</button>
 
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
@@ -456,6 +485,7 @@ const hide_noob_boostrap = document.querySelectorAll(".demo1");
 const myul = document.querySelector("#the_ul");
 
 const navbar = document.querySelector(".navbar");
+let mybutton = document.getElementById("topbtn");
 const app = { 
      name: "landing_page_project",
      author: "Mahmoud_hegazy",
@@ -594,18 +624,42 @@ const app = {
 
   });
   },
+
+did_scrol: function scrolled_or_what() {
+ // When the user scrolls down 20px from the top of the document, show the button
+  
+  window.onscroll = function() {
+  scrollFunction()
+  };
+
+  function scrollFunction() {
+    if (document.body.scrollTop > 20 ||        document.documentElement.scrollTop > 20) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
+}
+
+}, 
+ back_top: function back_to_top() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+},
+
+ backer: ()=> {
+      app.did_scrol();
+ },
+
   start: ()=> {
     app.nav_builder();
     app.applay_active();
+    app.backer();
     
-  }
-
-
+  },
 }
 
-         
-
 app.start();
+
 
 
 
